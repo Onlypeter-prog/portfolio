@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:   #1a1814;
+      --muted: #7a7570;
+      --line:  #e8e4df;
+      --accent:#c9501a;
+      --bg:    #faf8f5;
+      --card:  #ffffff;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 12rem 3rem 6rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--ink); color: #fff; }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-outline { border: 1px solid var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: #fff; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 5rem 3rem; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+    }
+    .skill-item {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .skill-item h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .skill-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--line); }
+    .project-item {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.75rem 2rem;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .project-item:hover { background: var(--card); }
+    .project-item:last-child { border-bottom: none; }
+    .project-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; margin-bottom: 0.35rem; }
+    .project-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .project-meta { text-align: right; }
+    .project-lang {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .project-arrow { font-size: 1.2rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-block {
+      border: 1px solid var(--line);
+      padding: 3rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .contact-block h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+    .contact-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-links a:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">YN.dev</span>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero reveal">
+    <p class="hero-tag">Full-stack developer &amp; open-source enthusiast</p>
+    <h1>Building things<br>for the <em>web.</em></h1>
+    <p class="hero-sub">
+      I craft clean, purposeful digital experiences — from snappy front-ends to robust back-end systems.
+      Based in the world, shipping to the internet.
+    </p>
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label reveal">— What I work with</p>
+    <div class="skills-grid">
+      <div class="skill-item reveal">
+        <h3>Frontend</h3>
+        <p>HTML, CSS, JavaScript, React, and anything that lives in the browser.</p>
+      </div>
+      <div class="skill-item reveal">
+        <h3>Backend</h3>
+        <p>Node.js, Python, REST APIs, databases — making sure things actually work.</p>
+      </div>
+      <div class="skill-item reveal">
+        <h3>Tooling</h3>
+        <p>Git, GitHub Actions, Webpack, Docker, and the terminal as a second home.</p>
+      </div>
+      <div class="skill-item reveal">
+        <h3>Design</h3>
+        <p>Figma, design systems, accessibility, and a bias toward simplicity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label reveal">— Featured projects</p>
+    <div class="projects-list">
+      <a href="#" class="project-item reveal">
+        <div>
+          <p class="project-title">Project Alpha</p>
+          <p class="project-desc">A short, punchy description of what this project does and why it matters. Keep it to two lines max.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-lang">JavaScript</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="project-item reveal">
+        <div>
+          <p class="project-title">Project Beta</p>
+          <p class="project-desc">Another great project. Highlight the problem it solved, not just the tech stack.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-lang">Python</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </a>
+      <a href="#" class="project-item reveal">
+        <div>
+          <p class="project-title">Project Gamma</p>
+          <p class="project-desc">Open-source tool used by N developers. Describe impact over implementation.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-lang">TypeScript</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label reveal">— Let's talk</p>
+    <div class="contact-block reveal">
+      <h2>Have a project<br>in mind?</h2>
+      <div class="contact-links">
+        <a href="mailto:you@example.com">you@example.com</a>
+        <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Your Name</p>
+    <p>Built with HTML, CSS &amp; JS</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
